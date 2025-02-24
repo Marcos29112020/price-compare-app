@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Preços de Mercearia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Comparador de Preços de Mercearia</h1>
+        
+        <!-- Formulário para adicionar produtos -->
+        <div class="input-section">
+            <input type="text" id="productName" placeholder="Nome do produto">
+            <input type="number" id="priceStore1" placeholder="Preço S.Romeu (R$)" step="0.01">
+            <input type="number" id="priceStore2" placeholder="Preço M.Jessé (R$)" step="0.01">
+            <input type="number" id="priceStore3" placeholder="Preço S. Zé do Feira (R$)" step="0.01">
+            <button onclick="addProduct()">Adicionar Produto</button>
+        </div>
+
+        <!-- Tabela de comparação -->
+        <table id="priceTable">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>S.Romeu (R$)</th>
+                    <th>M.Jessé (R$)</th>
+                    <th>S. Zé do Feira (R$)</th>
+                    <th>Melhor Opção</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Resumo -->
+        <div class="summary">
+            <h2>Resumo</h2>
+            <p>Total S.Romeu: R$ <span id="totalStore1">0.00</span></p>
+            <p>Total M.Jessé: R$ <span id="totalStore2">0.00</span></p>
+            <p>Total S. Zé do Feira: R$ <span id="totalStore3">0.00</span></p>
+            <p>Economia Máxima: R$ <span id="savings">0.00</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
