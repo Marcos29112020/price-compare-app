@@ -1,6 +1,7 @@
 let products = [];
+let editingIndex = -1; // -1 significa que não está editando, senão guarda o índice do produto
 
-function addProduct() {
+function addOrUpdateProduct() {
     const productName = document.getElementById('productName').value;
     const priceStore1 = parseFloat(document.getElementById('priceStore1').value) || 0;
     const priceStore2 = parseFloat(document.getElementById('priceStore2').value) || 0;
@@ -28,17 +29,44 @@ function addProduct() {
         bestOption: bestOption
     };
 
-    products.push(product);
+    if (editingIndex === -1) {
+        // Adicionar novo produto
+        products.push(product);
+    } else {
+        // Atualizar produto existente
+        products[editingIndex] = product;
+        editingIndex = -1; // Resetar após edição
+        document.querySelector('.input-section button').textContent = 'Adicionar Produto'; // Voltar texto do botão
+    }
+
     updateTable();
     updateSummary();
     clearInputs();
+}
+
+function editProduct(index) {
+    const product = products[index];
+    document.getElementById('productName').value = product.name;
+    document.getElementById('priceStore1').value = product.priceStore1;
+    document.getElementById('priceStore2').value = product.priceStore2;
+    document.getElementById('priceStore3').value = product.priceStore3;
+    editingIndex = index;
+    document.querySelector('.input-section button').textContent = 'Atualizar Produto';
+}
+
+function deleteProduct(index) {
+    if (confirm('Tem certeza que deseja excluir este produto?')) {
+        products.splice(index, 1);
+        updateTable();
+        updateSummary();
+    }
 }
 
 function updateTable() {
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
 
-    products.forEach(product => {
+    products.forEach((product, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${product.name}</td>
@@ -46,6 +74,10 @@ function updateTable() {
             <td>${product.priceStore2.toFixed(2)}</td>
             <td>${product.priceStore3.toFixed(2)}</td>
             <td>${product.bestOption}</td>
+            <td>
+                <button class="action-btn edit-btn" onclick="editProduct(${index})">Editar</button>
+                <button class="action-btn delete-btn" onclick="deleteProduct(${index})">Excluir</button>
+            </td>
         `;
         tableBody.appendChild(row);
     });

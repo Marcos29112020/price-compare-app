@@ -10,13 +10,13 @@
     <div class="container">
         <h1>Comparador de Preços de Mercearia</h1>
         
-        <!-- Formulário para adicionar produtos -->
+        <!-- Formulário para adicionar/editar produtos -->
         <div class="input-section">
             <input type="text" id="productName" placeholder="Nome do produto">
             <input type="number" id="priceStore1" placeholder="Preço S.Romeu (R$)" step="0.01">
             <input type="number" id="priceStore2" placeholder="Preço M.Jessé (R$)" step="0.01">
             <input type="number" id="priceStore3" placeholder="Preço S. Zé do Feira (R$)" step="0.01">
-            <button onclick="addProduct()">Adicionar Produto</button>
+            <button onclick="addOrUpdateProduct()">Adicionar Produto</button>
         </div>
 
         <!-- Tabela de comparação -->
@@ -28,6 +28,7 @@
                     <th>M.Jessé (R$)</th>
                     <th>S. Zé do Feira (R$)</th>
                     <th>Melhor Opção</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
